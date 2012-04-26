@@ -2,7 +2,7 @@ Links = new Meteor.Collection("links");
 
 if (Meteor.is_client) {
   Template.links.links = function() {
-    return Links.find({}, {sort: {timestamp: 1}});
+    return Links.find({}, {sort: {timestamp: -1}});
   }
 }
 
