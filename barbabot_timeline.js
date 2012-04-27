@@ -28,6 +28,14 @@ if (Meteor.is_client) {
     }
     return false;
   }
+
+  Template.links.date = function() {
+    return moment(this.timestamp).format("MMMM DD");
+  }
+
+  Template.links.long_date = function() {
+    return moment(this.timestamp).format("MMMM DD, YYYY \\at HH:mm");
+  }
 }
 
 if (Meteor.is_server) {
