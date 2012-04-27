@@ -4,6 +4,30 @@ if (Meteor.is_client) {
   Template.links.links = function() {
     return Links.find({}, {sort: {timestamp: -1}});
   }
+
+  Template.links.content_is = function(content_type) {
+    switch(content_type) {
+      case 'image':
+        var ext = this.url.split(".").pop();
+        return ["jpg", "png", "gif"].indexOf(ext) != -1
+        break;
+      case 'vimeo':
+        if(this.url.match(/[http|https]\:\/\/vimeo\.com\/.*(\d{8})$/)){
+          this.content = RegExp.$1;
+          return true;
+        }
+        break;
+      case 'youtube':
+        if(this.url.match(/[http|https]\:\/\/www\.youtube\.com\/watch\?.*v=(.{11}).*/)) {
+          this.content = RegExp.$1;
+          return true;
+        }
+        break;
+      default:
+        return false;
+    }
+    return false;
+  }
 }
 
 if (Meteor.is_server) {

@@ -33,7 +33,19 @@
 <template name="links">
   <ul class='vertical ' id='timeline'>
     {{#each links}}
-    <li class='timespot'><div class='text'><p><a href="{{url}}">{{description}}</a></p></div><div class='long_date'>Posted on {{timestamp}}</div><div class='date'></div>
+    <li class='timespot'>
+      <div class='text'><p><a href="{{url}}">{{description}}</a>
+      {{#if content_is "image"}}
+      <br><img src="{{url}}"><br>
+      {{/if}}
+      {{#if content_is "vimeo"}}
+      <br><div style="height:238px"><iframe width=400 height=238 src="https://player.vimeo.com/video/{{content}}?title=0&byline=0&portrait=0"></iframe></div>
+      {{/if}}
+      {{#if content_is "youtube"}}
+      <br><div style="height:238px"><iframe width=400 height=238 src="https://www.youtube.com/embed/{{content}}"></iframe></div>
+      {{/if}}
+      </p></div><div class='long_date'>Posted on {{timestamp}}</div><div class='date'></div>
+     </li>
     {{/each}}
   </ul>
 </template>
